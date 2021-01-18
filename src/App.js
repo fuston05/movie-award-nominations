@@ -1,7 +1,10 @@
+import { Loader } from './components';
+
+
 function App() {
   return (
     <div className="App">
-      test
+      <Loader />
     </div>
   );
 }
