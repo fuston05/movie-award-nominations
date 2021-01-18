@@ -1,1 +1,18 @@
 /* ** SEARCH STYLES ** */
+
+.searchCont{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 80%;
+  margin: 0 auto;
+  padding: 2% 0 0 0;
+}
+
+.searchCont input{
+  width: 100%;
+}
+
+.searchCont label{
+  margin-bottom: 1%;
+}
