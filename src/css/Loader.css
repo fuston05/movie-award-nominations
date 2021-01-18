@@ -1,15 +1,26 @@
 /* ** LOADER STYLES ** */
 
 .loaderCont {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
-  width: 10%;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  text-align: center;
 }
 
 .loaderCont p{
   position: absolute;
   bottom: 0;
+}
+
+.loaderCont .imgCont{
+  margin-top: 2%;
+  width: 8%;
+  height: 8%;
 }
 
 img{
