@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // components
-import { Loader, Search } from "./components";
+import { Loader, Search, Results, Nominations } from "./components";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +19,11 @@ function App() {
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />
+      {/* lower container */}
+      <section className= 'results-noms-cont'>
+        <Results />
+        <Nominations />
+      </section>
     </div>
   );
 }
