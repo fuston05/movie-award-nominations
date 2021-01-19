@@ -7,7 +7,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [nominations, setNominations] = useState([]);
-  const[searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   return (
     <div className="App">
@@ -16,7 +16,7 @@ function App() {
       {isLoading && <Loader />}
 
       <Search
-        setSearchResults= {setSearchResults}
+        setSearchResults={setSearchResults}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         isLoading={isLoading}
@@ -24,7 +24,13 @@ function App() {
       />
       {/* lower container */}
       <section className="results-noms-cont">
-        <Results nominaitons={nominations} setNominations={setNominations} />
+        <Results
+          nominaitons={nominations}
+          setNominations={setNominations}
+          searchTerm={searchTerm}
+          searchResults={searchResults}
+        />
+
         <Nominations nominations={nominations} />
       </section>
     </div>

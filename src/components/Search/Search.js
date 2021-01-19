@@ -5,12 +5,18 @@ import React, { useState, useEffect } from "react";
 // api
 import { fetchData } from "../../api/fetchData";
 
-export const Search = ({ setSearchResults, searchTerm, setSearchTerm, isLoading, setIsLoading }) => {
+export const Search = ({
+  setSearchResults,
+  searchTerm,
+  setSearchTerm,
+  setIsLoading,
+}) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
   const searchChange = (e) => {
     setSubmitDelay(true);
     setSearchTerm(e.target.value);
+    // delayed auto-submit
     window.setTimeout(() => {
       setSubmitDelay(false);
     }, 2000);
@@ -18,11 +24,10 @@ export const Search = ({ setSearchResults, searchTerm, setSearchTerm, isLoading,
 
   useEffect(() => {
     if (searchTerm.length && !submitDelay) {
-      console.log("submitted!");
       setIsLoading(true);
       fetchData({ searchTerm })
-        .then(res => {
-          console.log('res: ', res.data.Search);
+        .then((res) => {
+          console.log("res: ", res.data.Search);
           setSearchResults(res.data.Search);
           setIsLoading(false);
         })
@@ -30,7 +35,7 @@ export const Search = ({ setSearchResults, searchTerm, setSearchTerm, isLoading,
           console.log("Error: ", err);
         });
     }
-  }, [searchTerm, submitDelay]);
+  }, [searchTerm, submitDelay, setIsLoading, setSearchResults]);
 
   return (
     <div className="searchCont">
