@@ -16,6 +16,7 @@ export const Search = ({ searchTerm, setSearchTerm }) => {
   useEffect(() => {
     if (searchTerm.length && !submitDelay) {
       console.log("submitted!");
+      // axios call goes here
     }
   }, [searchTerm, submitDelay]);
 
