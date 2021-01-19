@@ -6,6 +6,8 @@ import { Loader, Search, Results, Nominations } from "./components";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [nominations, setNominations] = useState([]);
+  const[searchResults, setSearchResults] = useState([]);
 
   return (
     <div className="App">
@@ -14,15 +16,16 @@ function App() {
       {isLoading && <Loader />}
 
       <Search
+        setSearchResults= {setSearchResults}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />
       {/* lower container */}
-      <section className= 'results-noms-cont'>
-        <Results />
-        <Nominations />
+      <section className="results-noms-cont">
+        <Results nominaitons={nominations} setNominations={setNominations} />
+        <Nominations nominations={nominations} />
       </section>
     </div>
   );

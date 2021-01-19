@@ -2,7 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 
-export const Search = ({ searchTerm, setSearchTerm }) => {
+// api
+import { fetchData } from "../../api/fetchData";
+
+export const Search = ({ setSearchResults, searchTerm, setSearchTerm, isLoading, setIsLoading }) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
   const searchChange = (e) => {
@@ -16,7 +19,16 @@ export const Search = ({ searchTerm, setSearchTerm }) => {
   useEffect(() => {
     if (searchTerm.length && !submitDelay) {
       console.log("submitted!");
-      // axios call goes here
+      setIsLoading(true);
+      fetchData({ searchTerm })
+        .then(res => {
+          console.log('res: ', res.data.Search);
+          setSearchResults(res.data.Search);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log("Error: ", err);
+        });
     }
   }, [searchTerm, submitDelay]);
 
