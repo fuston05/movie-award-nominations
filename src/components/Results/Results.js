@@ -20,13 +20,9 @@ export const Results = ({
           searchResults.map((movie) => {
             return (
               <div className="movieCard" key={movie.imdbID}>
-                <h3>{movie.Title}</h3>
-                <p>{movie.Year}</p>
-                {nominations && nominations.includes(movie) ? (
-                  <button disabled>Nominate</button>
-                ) : (
-                  <button>Nominate</button>
-                )}
+                <span className="movieInfo">{movie.Title} - </span>
+                <span className= 'movieInfo movieYear'>{movie.Year}</span>
+                <button className= 'nominateBtn' disabled={nominations && nominations.includes(movie) }>Nominate</button>
               </div>
             );
           })}
