@@ -8,6 +8,7 @@ export const Results = ({
   setNominations,
   searchResults,
 }) => {
+
   return (
     <div className="resultsCont">
       <h2>

@@ -9,18 +9,19 @@ function App() {
   const [nominations, setNominations] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
+  const resultsCache = {};
   return (
     <div className="App">
       <h1>Movie Awards Nominator</h1>
 
       {isLoading && <Loader />}
-
       <Search
         setSearchResults={setSearchResults}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
+        resultsCache= {resultsCache}
       />
       {/* lower container */}
       <section className="results-noms-cont">

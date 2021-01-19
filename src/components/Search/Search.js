@@ -10,26 +10,41 @@ export const Search = ({
   searchTerm,
   setSearchTerm,
   setIsLoading,
+  resultsCache,
 }) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
   const searchChange = (e) => {
+    searchTerm.length && setIsLoading(true);
     setSubmitDelay(true);
     setSearchTerm(e.target.value);
     // delayed auto-submit
     window.setTimeout(() => {
       setSubmitDelay(false);
-    }, 2000);
+      setIsLoading(false);
+    }, 1000);
   };
 
   useEffect(() => {
     if (searchTerm.length && !submitDelay) {
-      setIsLoading(true);
-      fetchData({ searchTerm })
+      // if searchTerm in session cache, use cached data instead
+      if (window.sessionStorage.getItem(searchTerm)) {
+        return setSearchResults(
+          JSON.parse(window.sessionStorage.getItem(searchTerm))
+        );
+      }
+
+      fetchData(searchTerm)
         .then((res) => {
-          console.log("res: ", res.data.Search);
-          setSearchResults(res.data.Search);
           setIsLoading(false);
+          if (res.data.Search && res.data.Search.length) {
+            setSearchResults(res.data.Search);
+            // cache results for searchTerm in a session
+            window.sessionStorage.setItem(
+              searchTerm,
+              JSON.stringify(res.data.Search)
+            );
+          }
         })
         .catch((err) => {
           console.log("Error: ", err);
@@ -40,7 +55,6 @@ export const Search = ({
   return (
     <div className="searchCont">
       <label htmlFor="searchInput">Movie Title</label>
-
       <input
         value={searchTerm}
         onChange={(e) => searchChange(e)}
