@@ -10,6 +10,7 @@ export const Search = ({
   searchTerm,
   setSearchTerm,
   setIsLoading,
+  nominations
 }) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
@@ -38,6 +39,7 @@ export const Search = ({
 
       fetchData(searchTerm)
         .then((res) => {
+          console.log('res: ', res.data.Search)
           // stop the loading spinner
           setIsLoading(false);
           if (res.data.Search && res.data.Search.length) {

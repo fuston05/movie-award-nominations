@@ -15,6 +15,7 @@ function App() {
 
       {isLoading && <Loader />}
       <Search
+        nominations= {nominations}
         setSearchResults={setSearchResults}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -24,13 +25,13 @@ function App() {
       {/* lower container */}
       <section className="results-noms-cont">
         <Results
-          nominaitons={nominations}
+          nominations={nominations}
           setNominations={setNominations}
           searchTerm={searchTerm}
           searchResults={searchResults}
         />
 
-        <Nominations nominations={nominations} />
+        <Nominations searchTerm= {searchTerm} nominations={nominations} setNominations= {setNominations} />
       </section>
     </div>
   );
