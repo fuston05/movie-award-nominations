@@ -12,6 +12,17 @@ function App() {
   const nominateMovie = (movie) => {
     movie.nom = true;
     setNominations([...nominations, movie]);
+
+    // update cached search results 'nom' prop
+    let cachedResults = JSON.parse(window.sessionStorage.getItem(searchTerm));
+    let newCache = cachedResults.map((result) => {
+      if (result.imdbID === movie.imdbID) {
+        result.nom = true;
+      }
+      return result;
+    });
+    // update session search results cache
+    window.sessionStorage.setItem(searchTerm, JSON.stringify(newCache));
   };
 
   const removeNominee = (nominee) => {
@@ -19,12 +30,17 @@ function App() {
       return nomItem.imdbID !== nominee.imdbID;
     });
     setNominations(temp);
-    // update nom property on results list
-    searchResults.map(result => {
+    
+    // update 'nom' property in search results
+    let cachedResults = JSON.parse(window.sessionStorage.getItem(searchTerm));
+    let newCache= cachedResults.map((result) => {
       if (result.imdbID === nominee.imdbID) {
         delete result.nom;
       }
-    })
+      return result;
+    });
+    // update session search results cache
+    window.sessionStorage.setItem(searchTerm, JSON.stringify(newCache));
   };
 
   return (

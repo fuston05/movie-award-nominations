@@ -39,7 +39,6 @@ export const Search = ({
 
       fetchData(searchTerm)
         .then((res) => {
-          console.log('res: ', res.data.Search)
           // stop the loading spinner
           setIsLoading(false);
           if (res.data.Search && res.data.Search.length) {
@@ -57,7 +56,7 @@ export const Search = ({
           console.log("Error: ", err);
         });
     }
-  }, [searchTerm, submitDelay, setIsLoading, setSearchResults]);
+  }, [searchTerm, submitDelay, setIsLoading, setSearchResults, nominations]);
 
   return (
     <div className="searchCont">
