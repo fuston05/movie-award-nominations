@@ -10,7 +10,6 @@ export const Search = ({
   searchTerm,
   setSearchTerm,
   setIsLoading,
-  resultsCache,
 }) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
