@@ -5,17 +5,9 @@ import React from "react";
 export const Results = ({
   searchTerm,
   nominations,
-  setNominations,
+  nominateMovie,
   searchResults,
 }) => {
-
-  const nominateMovie = (movie) => {
-    movie.nom = true;
-    // update session data
-    let temp = [...nominations, movie];
-    window.sessionStorage.setItem(searchTerm, JSON.stringify(temp))
-    setNominations(temp)
-  }
 
   return (
     <div className="resultsCont">

@@ -2,23 +2,11 @@
 
 import React from "react";
 
-export const Nominations = ({searchTerm, nominations, setNominations }) => {
-  const removeNominee = (movie) => {
-    let temp = nominations.filter((nominee) => {
-      if (nominee.imdbID !== movie.imdbID) {
-        delete nominee.nominations
-      }
-      return nominee.imdbID !== movie.imdbID
-    });
-    console.log('temp: ', temp)
-    window.sessionStorage.setItem(searchTerm, JSON.stringify(temp))
-    setNominations(temp);
-  };
+export const Nominations = ({ nominations, setNominations, removeNominee }) => {
 
   return (
     <div className="resultsCont">
       <h2>Nominations</h2>
-      {console.log('nominations: ', nominations)}
       <div className="moviesCont">
         {nominations &&
           nominations.map((nominee) => {
