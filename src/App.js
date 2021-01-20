@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Loader, Search, Results, Nominations } from "./components";
 
 // utils
-import { updateResSession } from "./utils";
+import { updateResAndSession } from "./utils";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +18,7 @@ function App() {
     setNominations([...nominations, movie]);
 
     // update the search results to reflect if nominated or not
-    updateResSession(searchTerm, movie, true);
+    updateResAndSession(searchTerm, movie, true);
   };
 
   const removeNominee = (nominee) => {
@@ -29,7 +29,7 @@ function App() {
     setNominations(temp);
 
     // update the search results to reflect if nominated or not
-    updateResSession(searchTerm, nominee, false);
+    updateResAndSession(searchTerm, nominee, false);
   };
 
   return (

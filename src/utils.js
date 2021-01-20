@@ -1,6 +1,6 @@
 // ** UTILITY/HELPER FUNCTIONS **
 
-const updateResSession = (sessionName, movieToUpdate, isAddingNomination) => {
+const updateResAndSession = (sessionName, movieToUpdate, isAddingNomination) => {
   // sessionName: name of the session to update
   // movieToUpdate: the movie we are adding or removing the 'nom' property on
   // isAddingNomination: bool => adding or removing a nomination?
@@ -19,4 +19,4 @@ const updateResSession = (sessionName, movieToUpdate, isAddingNomination) => {
   return window.sessionStorage.setItem(sessionName, JSON.stringify(newCache));
 };
 
-export { updateResSession };
+export { updateResAndSession };
