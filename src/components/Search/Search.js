@@ -14,12 +14,14 @@ export const Search = ({
   const [submitDelay, setSubmitDelay] = useState(true);
 
   const searchChange = (e) => {
+    // start the loading spinner if there's a searchTerm
     searchTerm.length && setIsLoading(true);
     setSubmitDelay(true);
     setSearchTerm(e.target.value);
     // delayed auto-submit
     window.setTimeout(() => {
       setSubmitDelay(false);
+      // stop the loading spinner
       setIsLoading(false);
     }, 800);
   };
@@ -36,6 +38,7 @@ export const Search = ({
 
       fetchData(searchTerm)
         .then((res) => {
+          // stop the loading spinner
           setIsLoading(false);
           if (res.data.Search && res.data.Search.length) {
             setSearchResults(res.data.Search);
