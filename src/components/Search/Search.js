@@ -22,13 +22,14 @@ export const Search = ({
     window.setTimeout(() => {
       setSubmitDelay(false);
       setIsLoading(false);
-    }, 1000);
+    }, 800);
   };
 
   useEffect(() => {
-    if (searchTerm.length && !submitDelay) {
+    if (!submitDelay) {
       // if searchTerm in session cache, use cached data instead
       if (window.sessionStorage.getItem(searchTerm)) {
+        setIsLoading(false);
         return setSearchResults(
           JSON.parse(window.sessionStorage.getItem(searchTerm))
         );
@@ -44,6 +45,8 @@ export const Search = ({
               searchTerm,
               JSON.stringify(res.data.Search)
             );
+          } else {
+            setSearchResults([]);
           }
         })
         .catch((err) => {
