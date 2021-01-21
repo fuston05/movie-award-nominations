@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // components
 import { Loader, Search, Results, Nominations } from "./components";
@@ -9,7 +9,12 @@ import { updateResAndSession } from "./utils";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [nominations, setNominations] = useState([]);
+  // persist nominations in localstorage if exists
+  const [nominations, setNominations] = useState(
+    window.localStorage.getItem("nominations").length
+      ? window.JSON.parse(localStorage.getItem("nominations"))
+      : []
+  );
   const [searchResults, setSearchResults] = useState([]);
 
   const nominateMovie = (movie) => {
@@ -31,6 +36,10 @@ function App() {
     // update the search results to reflect if nominated or not
     updateResAndSession(searchTerm, nominee, false);
   };
+
+  useEffect(() => {
+    window.localStorage.setItem("nominations", JSON.stringify(nominations));
+  }, [nominations]);
 
   return (
     <div className="App">
