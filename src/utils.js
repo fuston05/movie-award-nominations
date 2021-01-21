@@ -1,22 +1,19 @@
 // ** UTILITY/HELPER FUNCTIONS **
 
-const updateResAndSession = (sessionName, movieToUpdate, isAddingNomination) => {
-  // sessionName: name of the session to update
+const updateResAndSession = (cachedResults, setCachedResults, movieToUpdate, isAddingNomination, page) => {
   // movieToUpdate: the movie we are adding or removing the 'nom' property on
   // isAddingNomination: bool => adding or removing a nomination?
 
-  // grab the current session data
-  let oldCache = JSON.parse(window.sessionStorage.getItem(sessionName));
-
   // add or remove the 'nom' prop from movie object
-  let newCache = oldCache.map((result) => {
+  let newCache = cachedResults && cachedResults[page].map((result) => {
     if (result.imdbID === movieToUpdate.imdbID) {
       isAddingNomination ? result.nom = true : delete result.nom;
     }
     return result;
   });
+  console.log('result from utils: ', newCache)
   // update new session data
-  return window.sessionStorage.setItem(sessionName, JSON.stringify(newCache));
+  setCachedResults({[page]: newCache})
 };
 
 export { updateResAndSession };

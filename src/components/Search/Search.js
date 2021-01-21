@@ -7,10 +7,13 @@ import { fetchData } from "../../api/fetchData";
 
 export const Search = ({
   setSearchResults,
+  cachedResults,
+  setCachedResults,
   searchTerm,
   setSearchTerm,
   setIsLoading,
-  nominations
+  nominations, 
+  page
 }) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
@@ -30,24 +33,21 @@ export const Search = ({
   useEffect(() => {
     if (!submitDelay) {
       // if searchTerm in session cache, use cached data instead
-      if (window.sessionStorage.getItem(searchTerm)) {
+      if (cachedResults[page]) {
         setIsLoading(false);
         return setSearchResults(
-          JSON.parse(window.sessionStorage.getItem(searchTerm))
+          cachedResults[page]
         );
       }
 
-      fetchData(searchTerm)
+      fetchData(searchTerm, page)
         .then((res) => {
           // stop the loading spinner
           setIsLoading(false);
           if (res.data.Search && res.data.Search.length) {
             setSearchResults(res.data.Search);
-            // cache results for searchTerm in a session
-            window.sessionStorage.setItem(
-              searchTerm,
-              JSON.stringify(res.data.Search)
-            );
+            // cache results for searchTerm
+            setCachedResults({[page] : res.data.Search})
           } else {
             setSearchResults([]);
           }

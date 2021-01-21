@@ -4,26 +4,31 @@ import React, { useState, useEffect } from "react";
 import { Loader, Search, Results, Nominations } from "./components";
 
 // utils
-import { updateResAndSession } from "./utils";
+import {updateResAndSession} from './utils'
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   // persist nominations in localstorage if exists
   const [nominations, setNominations] = useState(
-    window.localStorage.getItem("nominations").length
+    (window.localStorage.getItem("nominations") && window.localStorage.getItem('nominations').length)
       ? window.JSON.parse(localStorage.getItem("nominations"))
       : []
   );
   const [searchResults, setSearchResults] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(null);
+  const [cachedResults, setCachedResults] = useState({});
 
   const nominateMovie = (movie) => {
+    // update the search results to reflect if nominated or not
+    updateResAndSession(cachedResults, setCachedResults, movie, true, page);
+    
     // update nominations
     movie.nom = true;
     setNominations([...nominations, movie]);
 
-    // update the search results to reflect if nominated or not
-    updateResAndSession(searchTerm, movie, true);
   };
 
   const removeNominee = (nominee) => {
@@ -31,10 +36,10 @@ function App() {
     let temp = nominations.filter((nomItem) => {
       return nomItem.imdbID !== nominee.imdbID;
     });
+    // update the search results to reflect if nominated or not
+    updateResAndSession(cachedResults, setCachedResults, nominee, false, page);
     setNominations(temp);
 
-    // update the search results to reflect if nominated or not
-    updateResAndSession(searchTerm, nominee, false);
   };
 
   useEffect(() => {
@@ -47,8 +52,11 @@ function App() {
 
       {isLoading && <Loader />}
       <Search
+        page={page}
         nominations={nominations}
         setSearchResults={setSearchResults}
+        cachedResults={cachedResults}
+        setCachedResults= {setCachedResults}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         isLoading={isLoading}
