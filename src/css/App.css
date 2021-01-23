@@ -14,6 +14,7 @@
 .results-noms-cont{
   margin-top: 2%;
   display: flex;
+  max-width: 100%;
   justify-content: space-between;
   align-items: flex-start;
 }

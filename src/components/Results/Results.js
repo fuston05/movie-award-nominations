@@ -11,7 +11,8 @@ export const Results = ({
   searchResults,
   page,
   setPage,
-  totalPages
+  totalPages,
+  isNomLimit,
 }) => {
   return (
     <div className="resultsCont">
@@ -21,7 +22,7 @@ export const Results = ({
       </h2>
       <div className="moviesCont">
         {searchResults.length > 0 && (
-          <Pagination page={page} setPage={setPage} totalPages= {totalPages} />
+          <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         )}
 
         {searchResults &&
@@ -30,8 +31,11 @@ export const Results = ({
               <div className="movieCard" key={movie.imdbID}>
                 <span className="movieInfo">{movie.Title} - </span>
                 <span className="movieInfo movieYear">{movie.Year}</span>
-                {nominations &&
-                JSON.stringify(nominations).includes(JSON.stringify(movie)) ? (
+                {(nominations &&
+                  JSON.stringify(nominations).includes(
+                    JSON.stringify(movie)
+                  )) ||
+                isNomLimit ? (
                   <button disabled>Nominate</button>
                 ) : (
                   <button onClick={() => nominateMovie(movie)}>Nominate</button>

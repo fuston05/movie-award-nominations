@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // components
-import { Loader, Search, Results, Nominations } from "./components";
+import { Loader, Search, Results, Nominations, Message } from "./components";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,10 +16,14 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
+  const [isNomLimit, setIsNomLimit] = useState(false);
+  const [isMessage, setIsMessage] = useState(false);
 
   const nominateMovie = (movie) => {
-    // update nominations
-    setNominations([...nominations, movie]);
+    // update nominations if we're not at limit
+    if (!isNomLimit) {
+      setNominations([...nominations, movie]);
+    }
   };
 
   const removeNominee = (nominee) => {
@@ -34,15 +38,28 @@ function App() {
   useEffect(() => {
     nominations &&
       window.localStorage.setItem("nominations", JSON.stringify(nominations));
+
+    // check nominaions limit
+    if (nominations.length < 5) {
+      setIsNomLimit(false); 
+      setIsMessage(false);
+    } else {
+      setIsNomLimit(true);
+      setIsMessage(true);
+    }
   }, [nominations]);
 
   return (
     <div className="App">
+      {isMessage && (
+        <Message setIsMessage={setIsMessage} message={"You have reached the nominations limit of 5"} />
+      )}
+
       <h1>Movie Awards Nominator</h1>
       {isLoading && <Loader />}
       <Search
         page={page}
-        setPage= {setPage}
+        setPage={setPage}
         setTotalPages={setTotalPages}
         nominations={nominations}
         setSearchResults={setSearchResults}
@@ -54,6 +71,7 @@ function App() {
       {/* lower container */}
       <section className="results-noms-cont">
         <Results
+          isNomLimit={isNomLimit}
           page={page}
           setPage={setPage}
           totalPages={totalPages}
