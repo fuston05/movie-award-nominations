@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export const Nominations = ({ nominations, setNominations, removeNominee }) => {
+export const Nominations = ({ nominations, removeNominee }) => {
 
   return (
     <div className="resultsCont">

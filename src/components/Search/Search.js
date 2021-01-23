@@ -7,13 +7,10 @@ import { fetchData } from "../../api/fetchData";
 
 export const Search = ({
   setSearchResults,
-  cachedResults,
-  setCachedResults,
   searchTerm,
   setSearchTerm,
   setIsLoading,
-  nominations, 
-  page
+  page,
 }) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
@@ -32,13 +29,6 @@ export const Search = ({
 
   useEffect(() => {
     if (!submitDelay) {
-      // if searchTerm in session cache, use cached data instead
-      if (cachedResults[page]) {
-        setIsLoading(false);
-        return setSearchResults(
-          cachedResults[page]
-        );
-      }
 
       fetchData(searchTerm, page)
         .then((res) => {
@@ -46,17 +36,13 @@ export const Search = ({
           setIsLoading(false);
           if (res.data.Search && res.data.Search.length) {
             setSearchResults(res.data.Search);
-            // cache results for searchTerm
-            setCachedResults({[page] : res.data.Search})
-          } else {
-            setSearchResults([]);
           }
         })
         .catch((err) => {
           console.log("Error: ", err);
         });
     }
-  }, [searchTerm, submitDelay, setIsLoading, setSearchResults, nominations]);
+  }, [searchTerm, submitDelay, setIsLoading, setSearchResults, page]);
 
   return (
     <div className="searchCont">
