@@ -23,7 +23,7 @@ export const Search = ({
     // delayed auto-submit
     window.setTimeout(() => {
       setSubmitDelay(false);
-      setPage(1)
+      setPage(1);
       // stop the loading spinner
     }, 800);
   };
@@ -38,7 +38,7 @@ export const Search = ({
             setSearchResults(res.data.Search);
             // stop the loading spinner
           } else {
-            setSearchResults([])
+            setSearchResults([]);
           }
           setIsLoading(false);
         })
