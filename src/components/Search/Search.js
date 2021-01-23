@@ -11,32 +11,33 @@ export const Search = ({
   setSearchTerm,
   setIsLoading,
   page,
+  setPage,
   setTotalPages,
 }) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
   const searchChange = (e) => {
     // start the loading spinner if there's a searchTerm
-    searchTerm.length && setIsLoading(true);
     setSubmitDelay(true);
     setSearchTerm(e.target.value);
     // delayed auto-submit
     window.setTimeout(() => {
       setSubmitDelay(false);
+      setPage(1)
       // stop the loading spinner
-      setIsLoading(false);
     }, 800);
   };
 
   useEffect(() => {
     if (!submitDelay) {
+      setIsLoading(true);
       fetchData(searchTerm, page)
         .then((res) => {
-          // stop the loading spinner
-          setIsLoading(false);
           if (res.data.Search && res.data.Search.length) {
             setTotalPages(res.data.totalResults);
             setSearchResults(res.data.Search);
+            // stop the loading spinner
+            setIsLoading(false);
           }
         })
         .catch((err) => {

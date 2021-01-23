@@ -44,6 +44,7 @@ function App() {
       {isLoading && <Loader />}
       <Search
         page={page}
+        setPage= {setPage}
         setTotalPages={setTotalPages}
         nominations={nominations}
         setSearchResults={setSearchResults}
