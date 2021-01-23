@@ -11,6 +11,7 @@ export const Search = ({
   setSearchTerm,
   setIsLoading,
   page,
+  setTotalPages,
 }) => {
   const [submitDelay, setSubmitDelay] = useState(true);
 
@@ -29,12 +30,12 @@ export const Search = ({
 
   useEffect(() => {
     if (!submitDelay) {
-
       fetchData(searchTerm, page)
         .then((res) => {
           // stop the loading spinner
           setIsLoading(false);
           if (res.data.Search && res.data.Search.length) {
+            setTotalPages(res.data.totalResults);
             setSearchResults(res.data.Search);
           }
         })
@@ -42,7 +43,14 @@ export const Search = ({
           console.log("Error: ", err);
         });
     }
-  }, [searchTerm, submitDelay, setIsLoading, setSearchResults, page]);
+  }, [
+    searchTerm,
+    submitDelay,
+    setIsLoading,
+    setSearchResults,
+    page,
+    setTotalPages,
+  ]);
 
   return (
     <div className="searchCont">

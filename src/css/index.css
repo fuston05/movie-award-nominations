@@ -1,9 +1,10 @@
 /* **  INDEX CSS ** */
 
-@import './reset.css';
-@import './global.css';
-@import './App.css';
-@import './Loader.css';
-@import './Nominations.css';
-@import './Results.css';
-@import './Search.css';
+@import "./reset.css";
+@import "./global.css";
+@import "./App.css";
+@import "./Loader.css";
+@import "./Nominations.css";
+@import "./Results.css";
+@import "./Search.css";
+@import "./Pagination.css";

@@ -39,9 +39,12 @@ function App() {
   return (
     <div className="App">
       <h1>Movie Awards Nominator</h1>
+      {console.log('page: ', page)}
+      {console.log('totalPages: ', totalPages)}
       {isLoading && <Loader />}
       <Search
         page={page}
+        setTotalPages={setTotalPages}
         nominations={nominations}
         setSearchResults={setSearchResults}
         searchTerm={searchTerm}
@@ -52,6 +55,9 @@ function App() {
       {/* lower container */}
       <section className="results-noms-cont">
         <Results
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
           nominateMovie={nominateMovie}
           nominations={nominations}
           setNominations={setNominations}

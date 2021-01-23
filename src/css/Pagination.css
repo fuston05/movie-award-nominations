@@ -1,0 +1,18 @@
+/* ** PAGINATION STYLES ** */
+
+.paginationCont{
+  padding: 1% 0 3% 0;
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paginationButton{
+  text-decoration: underline;
+}
+
+.paginationButton:hover{
+  cursor: pointer;
+  opacity: 0.6;
+}
