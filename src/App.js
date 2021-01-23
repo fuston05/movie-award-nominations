@@ -39,8 +39,6 @@ function App() {
   return (
     <div className="App">
       <h1>Movie Awards Nominator</h1>
-      {console.log('page: ', page)}
-      {console.log('totalPages: ', totalPages)}
       {isLoading && <Loader />}
       <Search
         page={page}
