@@ -1,5 +1,5 @@
 /* ** MESSAGE STYLES ** */
-div.messageCont{
+div.messageCont {
   position: fixed;
   top: 5px;
   right: 5px;
@@ -7,15 +7,21 @@ div.messageCont{
   border: 2px solid lightBlue;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 3% 2% 2% 2%;
+  padding: 5% 2% 2% 2%;
   max-width: 100%;
 }
 
-.messageCont p{
+@media only screen and (max-width: 450px) {
+  div.messageCont {
+    padding: 7% 2% 2% 2%;
+  }
+}
+
+.messageCont p {
   color: #eee;
 }
 
-.messageCont .messageClose{
+.messageCont .messageClose {
   color: #eee;
   opacity: 0.8;
   position: absolute;
@@ -24,7 +30,7 @@ div.messageCont{
   font-size: 1.4rem;
 }
 
-.messageCont .messageClose:hover{
+.messageCont .messageClose:hover {
   color: #eee;
   opacity: 1;
   cursor: pointer;

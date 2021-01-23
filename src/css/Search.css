@@ -9,6 +9,12 @@
   padding: 2% 0 0 0;
 }
 
+@media only screen and (max-width: 450px){
+  .searchCont{
+    width: 100%;
+  }
+}
+
 .searchCont input{
   width: 100%;
 }

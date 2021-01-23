@@ -58,7 +58,13 @@ input {
 .resultsCont {
   width: 48%;
   padding: 2%;
-  /* border: 1px solid #eee; */
+}
+
+@media only screen and (max-width: 650px){
+  .resultsCont {
+    width: 100%;
+    padding: 2%;
+  }
 }
 
 .resultsCont h2{
@@ -67,6 +73,12 @@ input {
 
 .moviesCont {
   min-height: 45vh;
+}
+
+@media only screen and (max-width: 650px){
+  .moviesCont {
+    min-height: 0;
+  }
 }
 
 .movieCard {
