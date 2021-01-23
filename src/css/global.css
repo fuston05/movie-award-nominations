@@ -58,7 +58,7 @@ input {
 .resultsCont {
   width: 48%;
   padding: 2%;
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
 }
 
 .resultsCont h2{
@@ -66,10 +66,12 @@ input {
 }
 
 .moviesCont {
-  height: 45vh;
+  min-height: 45vh;
 }
 
 .movieCard {
+  border: 1px solid #eee;
+  padding: 2%;
   margin-bottom: 5px;
 }
 

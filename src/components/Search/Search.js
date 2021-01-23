@@ -37,10 +37,13 @@ export const Search = ({
             setTotalPages(res.data.totalResults);
             setSearchResults(res.data.Search);
             // stop the loading spinner
-            setIsLoading(false);
+          } else {
+            setSearchResults([])
           }
+          setIsLoading(false);
         })
         .catch((err) => {
+          setIsLoading(false);
           console.log("Error: ", err);
         });
     }
