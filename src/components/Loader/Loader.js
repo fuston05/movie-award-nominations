@@ -5,7 +5,7 @@ export const Loader = ({ text }) => {
   return (
     <div className="loaderCont">
       <div className="imgCont">
-        <img src="/images/loader.gif" alt="loading spinner" />
+        <img data-testid= 'loaderImg' src="/images/loader.gif" alt="loading spinner" />
       </div>
 
       {text && <p>{text}</p>}
