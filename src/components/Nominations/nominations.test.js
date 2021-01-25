@@ -6,13 +6,18 @@ import userEvent from "@testing-library/user-event";
 import { Nominations } from "./Nominations";
 
 describe("Nominations", () => {
-  it("renders without crashing", () => {
-    const nominations = [
+  // set up global vars for use in all tests
+  let nominations;
+  let nominee;
+  beforeAll(() => {
+    nominations = [
       { imdbID: 1, Title: "testTitle1", Year: "1978" },
       { imdbID: 2, Title: "testTitle2", Year: "2020" },
     ];
-    const nominee = { Title: "testTitle2", Year: "2020" };
+    nominee = { Title: "testTitle2", Year: "2020" };
+  });
 
+  it("renders without crashing", () => {
     const { getByTestId } = render(
       <Nominations nominations={nominations} nominee={nominee} />
     );
@@ -20,12 +25,6 @@ describe("Nominations", () => {
   });
 
   it("renders an H2 title", () => {
-    const nominations = [
-      { imdbID: 1, Title: "testTitle1", Year: "1978" },
-      { imdbID: 2, Title: "testTitle2", Year: "2020" },
-    ];
-    const nominee = { Title: "testTitle2", Year: "2020" };
-
     const { getByText } = render(
       <Nominations nominations={nominations} nominee={nominee} />
     );
@@ -33,12 +32,6 @@ describe("Nominations", () => {
   });
 
   it("renders 'movieCont' ", () => {
-    const nominations = [
-      { imdbID: 1, Title: "testTitle1", Year: "1978" },
-      { imdbID: 2, Title: "testTitle2", Year: "2020" },
-    ];
-    const nominee = { Title: "testTitle2", Year: "2020" };
-
     const { getByTestId } = render(
       <Nominations nominations={nominations} nominee={nominee} />
     );
@@ -46,12 +39,6 @@ describe("Nominations", () => {
   });
 
   it("renders a 'movieCard' for each movie passed in ", () => {
-    const nominations = [
-      { imdbID: 1, Title: "testTitle1", Year: "1978" },
-      { imdbID: 2, Title: "testTitle2", Year: "2020" },
-    ];
-    const nominee = { Title: "testTitle2", Year: "2020" };
-
     const { queryAllByTestId } = render(
       <Nominations nominations={nominations} nominee={nominee} />
     );
@@ -61,12 +48,6 @@ describe("Nominations", () => {
   });
 
   it("renders a 'movieTitle' for each movie passed in ", () => {
-    const nominations = [
-      { imdbID: 1, Title: "testTitle1", Year: "1978" },
-      { imdbID: 2, Title: "testTitle2", Year: "2020" },
-    ];
-    const nominee = { Title: "testTitle2", Year: "2020" };
-
     const { queryAllByTestId } = render(
       <Nominations nominations={nominations} nominee={nominee} />
     );
@@ -76,12 +57,6 @@ describe("Nominations", () => {
   });
 
   it("renders a 'movieYear' for each movie passed in ", () => {
-    const nominations = [
-      { imdbID: 1, Title: "testTitle1", Year: "1978" },
-      { imdbID: 2, Title: "testTitle2", Year: "2020" },
-    ];
-    const nominee = { Title: "testTitle2", Year: "2020" };
-
     const { queryAllByTestId } = render(
       <Nominations nominations={nominations} nominee={nominee} />
     );
@@ -91,12 +66,6 @@ describe("Nominations", () => {
   });
 
   it("renders a 'Remove' button for each movie passed in ", () => {
-    const nominations = [
-      { imdbID: 1, Title: "testTitle1", Year: "1978" },
-      { imdbID: 2, Title: "testTitle2", Year: "2020" },
-    ];
-    const nominee = { Title: "testTitle2", Year: "2020" };
-
     const { getAllByText } = render(
       <Nominations nominations={nominations} nominee={nominee} />
     );
@@ -106,8 +75,6 @@ describe("Nominations", () => {
   });
 
   it("removes nominee from list when the 'Remove' button is clicked", () => {
-    let nominations = [{ imdbID: 1, Title: "testTitle1", Year: "1978" }];
-
     const removeNominee = (nominee) => {
       // update nominations
       let temp = nominations.filter((nomItem) => {
@@ -115,12 +82,12 @@ describe("Nominations", () => {
       });
       return (nominations = temp);
     };
-    const { getByText } = render(
+    const { queryAllByText } = render(
       <Nominations nominations={nominations} removeNominee={removeNominee} />
     );
-    const button = getByText("Remove");
+    const buttons = queryAllByText("Remove");
     // click the Remove button
-    userEvent.click(button);
-    expect(nominations).toHaveLength(0);
+    userEvent.click(buttons[0]);
+    expect(nominations).toHaveLength(1);
   });
 });
