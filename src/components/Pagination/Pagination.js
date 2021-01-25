@@ -17,9 +17,9 @@ export const Pagination = ({ page, setPage, totalPages }) => {
 
   return (
     <div className="paginationCont">
-      <p className= 'paginationButton' onClick= {() => prevPage()}>&laquo; Prev</p>
+      <p className= {`paginationButton ${page == 1 ? 'isDisabled' : null}`} onClick= {() => prevPage()}>&laquo; Prev</p>
       <p> {page} </p>
-      <p className= 'paginationButton' onClick= {() => nextPage()}>Next &raquo;</p>
+      <p className= {`paginationButton ${page +1 === Math.ceil(totalPages/10) ? 'isDisabled' : null}`} onClick= {() => nextPage()}>Next &raquo;</p>
     </div>
   );
 };
