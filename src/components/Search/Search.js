@@ -25,7 +25,7 @@ export const Search = ({
       setSubmitDelay(false);
       setPage(1);
       // stop the loading spinner
-    }, 800);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const Search = ({
   ]);
 
   return (
-    <div data-testid= 'searchCont' className="searchCont">
+    <div data-testid="searchCont" className="searchCont">
       <label htmlFor="searchInput">Movie Title</label>
       <input
         value={searchTerm}
