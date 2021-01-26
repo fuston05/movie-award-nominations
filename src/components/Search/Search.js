@@ -57,7 +57,7 @@ export const Search = ({
   ]);
 
   return (
-    <div className="searchCont">
+    <div data-testid= 'searchCont' className="searchCont">
       <label htmlFor="searchInput">Movie Title</label>
       <input
         value={searchTerm}
