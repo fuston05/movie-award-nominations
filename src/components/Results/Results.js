@@ -15,12 +15,12 @@ export const Results = ({
   isNomLimit,
 }) => {
   return (
-    <div className="resultsCont">
-      <h2>
+    <div data-testid= 'resultsCont' className="resultsCont">
+      <h2 data-testid= 'h2'>
         Results for
         {searchTerm ? ` '${searchTerm}'` : " ..."}
       </h2>
-      <div className="moviesCont">
+      <div data-testid= 'moviesCont' className="moviesCont">
         {searchResults.length > 0 && (
           <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         )}
@@ -28,17 +28,17 @@ export const Results = ({
         {searchResults &&
           searchResults.map((movie) => {
             return (
-              <div className="movieCard" key={movie.imdbID}>
-                <span className="movieInfo">{movie.Title} - </span>
-                <span className="movieInfo movieYear">{movie.Year}</span>
+              <div data-testid= 'movieCard' className="movieCard" key={movie.imdbID}>
+                <span data-testid= 'movieTitle' className="movieInfo">{movie.Title} - </span>
+                <span data-testid= 'movieYear' className="movieInfo movieYear">{movie.Year}</span>
                 {(nominations &&
                   JSON.stringify(nominations).includes(
                     JSON.stringify(movie)
                   )) ||
                 isNomLimit ? (
-                  <button disabled>Nominate</button>
+                  <button data-testid= 'nomButton' disabled>Nominate</button>
                 ) : (
-                  <button onClick={() => nominateMovie(movie)}>Nominate</button>
+                  <button data-testid= 'nomButton' onClick={() => nominateMovie(movie)}>Nominate</button>
                 )}
               </div>
             );
