@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // components
 import { Loader, Search, Results, Nominations, Message } from "./components";
 
-function App() {
+export const App= () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   // persist nominations in localstorage if exists
@@ -91,5 +91,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
